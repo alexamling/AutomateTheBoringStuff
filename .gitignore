@@ -99,6 +99,8 @@ ENV/
 .mypy_cache/
 
 *.iml
+/.idea/
+.idea/workspace.xml
 modules.xml
 .idea/misc.xml
 *.ipr
