@@ -22,4 +22,15 @@ emailRegex = re.compile(r'''(
     (\w*)               # domain ending
 )''', re.VERBOSE)
 
+# find matches on the clipboard
+text = str(pyperclip.paste())
+matches = []
+
+for groups in phoneRegex.findall((text)):
+    phoneNum = '-'.join([groups[1],groups[3],groups[5]])
+    matches.append(phoneNum)
+
+for groups in emailRegex.findall(text):
+    matches.append(groups[0])
+
 
