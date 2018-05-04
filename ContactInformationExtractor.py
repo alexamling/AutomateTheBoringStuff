@@ -33,4 +33,12 @@ for groups in phoneRegex.findall((text)):
 for groups in emailRegex.findall(text):
     matches.append(groups[0])
 
+# copy Results into Clipboard
+if len(matches) > 0:
+    pyperclip.copy('\n'.join(matches))
+    print('Copied to clipboard:')
+    print('\n'.join(matches))
+else:
+    print('No contact information found')
+
 
