@@ -8,21 +8,21 @@
 import shutil, os, re
 
 # Regex for finding American Dates
-americanDate = re.compile(r'''(
+americanDate = re.compile(r'''
     ^(.*?)                      # all text before the date
     ((0|1)?\d)-                  # the month
     ((0|1|2|3)?\d)-              # the day
     ((19|20)\d\d)                # the year
     (.*?)$                      # all text after the date
-    )'''. re.VERBOSE)
+    ''', re.VERBOSE)
 
 # Loop through all files in current directory
-for americanFilename in os.listdir('.'):
+for americanFile in os.listdir('.'):
     # identify American dates
-    match = americanDate.search(americanFilename)
+    match = americanDate.search(americanFile)
 
     # skip those without dates
-    if match == None:
+    if match is None:
         continue
 
     # separate the sections of the date
@@ -33,9 +33,13 @@ for americanFilename in os.listdir('.'):
     suffix = match.group(8)
 
     # build european date
-    europeanFileName = prefix + day + '_' + month + '_' + year + suffix
+    europeanFile = prefix + day + '-' + month + '-' + year + suffix
 
     # get absolute file path
     workingDirAbsolutePath = os.path.abspath('.')
-    americanFilename = os.path.join(workingDirAbsolutePath)
+    americanFile = os.path.join(workingDirAbsolutePath, americanFile)
+    europeanFile = os.path.join(workingDirAbsolutePath, europeanFile)
+
     # Rename files
+    print('Renaming "%s" to "%s"...' % (americanFile, europeanFile))
+    # shutil.move(americanFile, europeanFile) # commented for testing purposes
